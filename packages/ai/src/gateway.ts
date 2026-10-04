@@ -1,19 +1,19 @@
-import { OllamaProvider } from "./ollama-provider.js";
-import { MockProvider } from "./mock-provider.js";
+import { OllamaProvider } from "./ollama-provider";
+import { MockProvider } from "./mock-provider";
 import {
   ExtractedRequirementsPayload,
   ProposedMappingsPayload,
   ExplanationPayload,
   TailoredResumePayload,
   AiGatewayResponse
-} from "./types.js";
+} from "./types";
 import {
   PROMPT_VERSION,
   buildRequirementsExtractionPrompt,
   buildEvidenceMappingPrompt,
   buildExplanationPrompt,
   buildTailoringPrompt
-} from "./prompts.js";
+} from "./prompts";
 import { ModelRun } from "@resurox/schemas";
 import { randomUUID } from "node:crypto";
 

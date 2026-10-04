@@ -1,5 +1,5 @@
 import { EvidenceRecord, GroundingState } from "@resurox/schemas";
-import { normalizeSkill, areSkillsEquivalent } from "./alias-map.js";
+import { normalizeSkill, areSkillsEquivalent } from "./alias-map";
 
 export interface EvidenceVerificationResult {
   verified: boolean;

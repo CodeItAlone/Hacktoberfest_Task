@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { RequirementKindSchema, RequirementStateSchema } from "./job.js";
-import { GroundingStateSchema } from "./resume.js";
+import { RequirementKindSchema, RequirementStateSchema } from "./job";
+import { GroundingStateSchema } from "./resume";
 
 export const RequirementResultSchema = z.object({
   requirementId: z.string(),

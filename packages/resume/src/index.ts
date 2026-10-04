@@ -1,3 +1,3 @@
-export * from "./parser.js";
-export * from "./latex-template.js";
-export * from "./compiler.js";
+export * from "./parser";
+export * from "./latex-template";
+export * from "./compiler";

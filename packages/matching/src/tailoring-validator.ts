@@ -4,7 +4,7 @@ import {
   ValidatorViolation,
   GroundingState
 } from "@resurox/schemas";
-import { normalizeSkill, TECH_ALIAS_MAP } from "./alias-map.js";
+import { normalizeSkill, TECH_ALIAS_MAP } from "./alias-map";
 
 const APPROVED_HEADINGS = new Set([
   "summary",
@@ -34,10 +34,7 @@ const INJECTION_PATTERNS = [
  * Extracts distinct tokens representing tools, technologies, numbers, percentages, and metrics.
  */
 function extractTokens(text: string): { numbers: string[]; entities: string[] } {
-  // Match numbers and percentages e.g. "40%", "10x", "5000", "99.9%"
   const numberMatches = text.match(/\b\d+(\.\d+)?(%|x|k|\+)?\b/gi) || [];
-
-  // Match capitalized multi-word or single-word tech tokens
   const words = text.split(/[\s,;.()]+/);
   const entities: string[] = [];
 
@@ -45,7 +42,6 @@ function extractTokens(text: string): { numbers: string[]; entities: string[] } 
     const clean = w.trim().replace(/^[^a-zA-Z0-9]+|[^a-zA-Z0-9]+$/g, "");
     if (!clean) continue;
 
-    // Check if known in tech alias map
     const lower = clean.toLowerCase();
     if (TECH_ALIAS_MAP[lower]) {
       entities.push(clean);
@@ -73,7 +69,6 @@ export function validateTailoredContent(
   const violations: ValidatorViolation[] = [];
   const rawResumeText = originalProfile.rawText.toLowerCase();
 
-  // Build approved set of skills (verbatim in resume or user-confirmed)
   const approvedSkills = new Set<string>();
   for (const rec of originalProfile.evidenceRecords) {
     if (rec.state === "RESUME_EVIDENCE" || rec.state === "USER_CONFIRMED") {
@@ -145,7 +140,6 @@ export function validateTailoredContent(
         });
       }
 
-      // If user-confirmed only, it must NOT appear as a fabricated project bullet
       if (!inOriginalText && isApprovedSkill && headingClean.includes("project")) {
         violations.push({
           type: "UNAPPROVED_ENTITY",
