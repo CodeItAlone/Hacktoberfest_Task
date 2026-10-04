@@ -31,7 +31,7 @@ export const TailoredResumeSchema = z.object({
   jobId: z.string(),
   analysisId: z.string(),
   summary: z.string(),
-  skills: z.record(z.array(z.string())),
+  skills: z.record(z.string(), z.array(z.string())),
   experience: z.array(z.object({
     company: z.string(),
     role: z.string(),

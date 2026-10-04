@@ -13,7 +13,6 @@ export interface ExtractionResult {
 }
 
 export function extractJobFromPage(): ExtractionResult {
-  // Ladder Step 1: Schema.org JSON-LD
   const scripts = document.querySelectorAll('script[type="application/ld+json"]');
   for (const s of Array.from(scripts)) {
     try {
@@ -29,7 +28,6 @@ export function extractJobFromPage(): ExtractionResult {
     } catch {}
   }
 
-  // Ladder Step 2: User selection
   const selectedText = window.getSelection()?.toString().trim();
   if (selectedText && selectedText.length > 80) {
     return {
@@ -40,7 +38,6 @@ export function extractJobFromPage(): ExtractionResult {
     };
   }
 
-  // Ladder Step 3: DOM heuristic (search for main content or headings)
   const headings = Array.from(document.querySelectorAll("h1, h2, h3"));
   let candidateContainer: HTMLElement | null = null;
 
@@ -62,8 +59,7 @@ export function extractJobFromPage(): ExtractionResult {
   };
 }
 
-// Listen for popup trigger
-chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
+chrome.runtime.onMessage.addListener((message: any, _sender: any, sendResponse: any) => {
   if (message.action === "EXTRACT_JOB") {
     const result = extractJobFromPage();
     sendResponse({ status: "OK", data: result });

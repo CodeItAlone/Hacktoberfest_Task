@@ -23,7 +23,7 @@ extractTabBtn.addEventListener("click", async () => {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     if (!tab?.id) throw new Error("No active tab");
 
-    chrome.tabs.sendMessage(tab.id, { action: "EXTRACT_JOB" }, (res) => {
+    chrome.tabs.sendMessage(tab.id, { action: "EXTRACT_JOB" }, (res: any) => {
       if (res?.status === "OK" && res.data) {
         jobTitleInput.value = res.data.title || "Target Role";
         companyInput.value = res.data.company || "Company";

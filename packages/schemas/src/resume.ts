@@ -72,7 +72,7 @@ export const ResumeProfileSchema = z.object({
   education: z.array(EducationItemSchema).default([]),
   experience: z.array(ExperienceItemSchema).default([]),
   projects: z.array(ProjectItemSchema).default([]),
-  skills: z.record(z.array(z.string())).default({}), // e.g. { "Languages": ["TypeScript", "Python"], ... }
+  skills: z.record(z.string(), z.array(z.string())).default({}), // e.g. { "Languages": ["TypeScript", "Python"], ... }
   certifications: z.array(z.string()).default([]),
   rawText: z.string(),
   evidenceRecords: z.array(EvidenceRecordSchema).default([]),
